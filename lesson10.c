@@ -6,11 +6,10 @@ int main()
 {
     float fahr, celsius;
     fahr = INTI_VALUE;
-    while (fahr <= MAX_VALUE)
+    for (fahr; fahr <= MAX_VALUE; fahr += STEP)
     {
         celsius = (5.0 * (fahr - 32.0) / 9.0);
         printf("%3.0f %6.2f\n", fahr, celsius);
-        fahr += STEP;
     }
     return 0;
 }
