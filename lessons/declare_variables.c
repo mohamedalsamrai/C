@@ -4,7 +4,10 @@
 #define STEP 20
 int main()
 {
-    float fahr, celsius;// declare without initialization
+    int digit_count[10]; // declare without initialization
+    int arr[10] = {0}; // initialize all elements to 0
+    int arr[10] = {1, 2, 3}; // initialize first three elements to 1, 2, 3 and the rest to 0
+    float fahr, celsius; // declare without initialization
     fahr = INTI_VALUE;
     for (fahr; fahr <= MAX_VALUE; fahr += STEP)
     {
