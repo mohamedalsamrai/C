@@ -1,10 +1,10 @@
 #include <stdio.h>
-#define INTI_VALUE 0
+#define INTI_VALUE 0 // constant
 #define MAX_VALUE 300
 #define STEP 20
 int main()
 {
-    float fahr, celsius;
+    float fahr, celsius;// declare without initialization
     fahr = INTI_VALUE;
     for (fahr; fahr <= MAX_VALUE; fahr += STEP)
     {
