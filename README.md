@@ -46,4 +46,6 @@ Feel free to contribute to this repository by:
 
 ## License
 
-This repository is open source and available for learning purposes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2025 Mohamed Al-Samrai
