@@ -35,7 +35,7 @@ double sqrt(double n) {
 }
 
 int main() {
-    double number = 25;
+    double number = 786;
     printf("الجذر التربيعي لـ %.2f هو ≈ %.5f\n", number, sqrt(number));
     return 0;
 }
