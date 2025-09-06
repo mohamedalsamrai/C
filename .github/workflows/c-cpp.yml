@@ -8,16 +8,63 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      - uses: actions/checkout@v4
+
+      - name: configure
+        run: ./configure
+
+      - name: make
+        run: make -j$(nproc)
+
+      - name: make check
+        run: make check
+
+      - name: make distcheck
+        run: make distcheck
+
+  root-number:
+    name: Test algorithms/root_number.c
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+    
+      - name: Verify file exists
+        run: |
+          test -f algorithms/root_number.c || {
+            echo "algorithms/root_number.c not found"; exit 1;
+          }
+
+
+
+      - name: Compile (warnings as errors)
+        run: |
+          gcc -std=c11 -Wall -Wextra -Werror -pedantic -O2 \
+              -c algorithms/root_number.c -o root_number.o
+
+ 
+      - name: Build & run (if main is present)
+        shell: bash
+        run: |
+          if grep -Eq '^[[:space:]]*int[[:space:]]+main[[:space:]]*\(' algorithms/root_number.c; then
+            echo "main() detected: building runnable binary"
+            gcc -std=c11 -Wall -Wextra -Werror -O2 \
+                algorithms/root_number.c -lm -o root_number
+            ./root_number
+          else
+            echo "No main() detected: compile-only test passed."
+          fi
+
+      - name: ASan/UBSan run (if main is present)
+        shell: bash
+        run: |
+          if grep -Eq '^[[:space:]]*int[[:space:]]+main[[:space:]]*\(' algorithms/root_number.c; then
+            gcc -std=c11 -O1 -g -fno-omit-frame-pointer \
+                -fsanitize=address,undefined \
+                algorithms/root_number.c -lm -o root_number_san
+            ./root_number_san
+          else
+            echo "No main() detected: skipping sanitizer run."
+          fi
