@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include<math.h>
 /*
 this function to calculate bit length for n
 n>>=1 mean n=n>>1 to the right
@@ -35,11 +36,11 @@ double guess_init_point(double n)
         return guess;
     }
 }
-double sqrt(double n)
+double sqrtx(double n)
 {
     double guess = guess_init_point(n);
-    double epsilon = 0.00001;
-    while ((guess * guess - n) > epsilon || (guess * guess - n) < -epsilon)
+    double epsilon = 1e-5;
+    while ((guess * guess - n) > epsilon)
     {
         guess = (guess + n / guess) * 0.5;
     }
@@ -48,7 +49,8 @@ double sqrt(double n)
 
 int main()
 {
-    double number = 786;
-    printf("The root of %.2f = %.7f",number ,sqrt(number));
+    double number = 400000000007;
+     printf("The root of %.2f = %.10f \n",number ,sqrtx(number));
+     printf("The root of %.2f = %.10f",number ,sqrt(number));
     return 0;
 }
