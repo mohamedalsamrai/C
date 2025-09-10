@@ -49,8 +49,7 @@ double sqrtx(double n)
 
 int main()
 {
-    double number = 400000000007;
+    double number = 54747.77;
      printf("The root of %.2f = %.10f \n",number ,sqrtx(number));
-     printf("The root of %.2f = %.10f",number ,sqrt(number));
     return 0;
 }
